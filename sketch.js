@@ -78,6 +78,11 @@ function loadGameAssets() {
   soundFormats('mp3');
   wistleSound = loadSound('wistle.mp3');
 
+  //load each sound in the placeData array
+  for (let place of placeData) {
+    place.sound = loadSound(place.file);
+  } 
+
   let letters = "abcdefghijklmnopqrstuvwxyz";
   for (let s = 0; s < 3; s++) {
     for (let i = 0; i < letters.length; i++) {
