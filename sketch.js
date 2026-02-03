@@ -147,19 +147,33 @@ function draw() {
 
   ballPosX += ballSpeedX;
   ballPosY += ballSpeedY;
-
+  
+//left paddles collision
   if (ballPosX <= paddleLeftX + paddleWidth/2 + ballSize/2 && ballPosY > paddleLeftY - paddleHeight/2 && ballPosY < paddleLeftY + paddleHeight/2) {
     ballSpeedX = abs(ballSpeedX) * 1.08;
     ballSpeedY = (ballPosY - paddleLeftY) / 6;
     leftHitTime = millis();
     leftScore++;
+
+    // Pick a random place and play its sound
+    let chosenPlace = random(placeData);
+    if (chosenPlace.sound && chosenPlace.sound.isLoaded()) {
+      chosenPlace.sound.play();
+    }
     triggerFallingSubtitle(random(placeData), paddleLeftX, paddleLeftY, 'left');
   }
+    //right paddle collision
   if (ballPosX >= paddleRightX - paddleWidth/2 - ballSize/2 && ballPosY > paddleRightY - paddleHeight/2 && ballPosY < paddleRightY + paddleHeight/2) {
     ballSpeedX = -abs(ballSpeedX) * 1.08;
     ballSpeedY = (ballPosY - paddleRightY) / 6;
     rightHitTime = millis();
     rightScore++;
+
+    // Pick a random place and play its sound
+    let chosenPlace = random(placeData);
+    if (chosenPlace.sound && chosenPlace.sound.isLoaded()) {
+      chosenPlace.sound.play();
+    }
     triggerFallingSubtitle(random(placeData), paddleRightX, paddleRightY, 'right');
   }
 
